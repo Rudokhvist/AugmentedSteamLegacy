@@ -1,21 +1,11 @@
 var xulconnect = {
         send_request: function(data, callback) { // analogue of chrome.extension.sendRequest
           var request = document.createTextNode(JSON.stringify(data));
-          console.log("request in chrome");
-          console.log(data);
-          //console.log(JSON.stringify(data));
           request.addEventListener("xul-response", function resp(event) {
             request.removeEventListener("xul-response", resp, false); //remove listener, no longer needed
             request.parentNode.removeChild(request);
-            console.log("response in chrome");
-            console.log(request.nodeValue);
             if (callback) {
-              console.log(request);
-              try {
                var response = JSON.parse(request.nodeValue);
-              } catch(err){
-		console.log(err);
-              }
               callback(response);
             }
           }, false);
@@ -27,9 +17,6 @@ var xulconnect = {
           request.dispatchEvent(event);
         },
 
-//        callback: function(response) {
-//          return alert("response: " + (response ? response.toSource() : response));
-//        }
       };
 
 var chrome = {
@@ -77,15 +64,13 @@ var chrome = {
 
 
     sendMessage: function (message, callback){
-      //console.log("sendmessage");
       xulconnect.send_request({"command":"message","data":message},callback);
       return;
     },
 
     getURL: function (url){
-      //console.log(url);
-      //console.log(url.startsWith("/")?"resource://augmentedsteamlegacy"+url : "resource://augmentedsteamlegacy/"+url);
-      return url.startsWith("/")?"resource://augmentedsteamlegacy/AugmentedSteam"+url : "resource://augmentedsteamlegacy/AugmentedSteam/"+url;
+      var result=url.startsWith("/")?"resource://augmentedsteamlegacy/AugmentedSteam"+url : "resource://augmentedsteamlegacy/AugmentedSteam/"+url; 
+      return result;
     }
 
   }
@@ -95,34 +80,18 @@ var chrome = {
 if (!oldfetch) {
   var oldfetch = fetch;
   fetch = function (url) {
-    console.log("fetch is happening");
-    console.log(window.location);
     var domain = url.replace('http://','').replace('https://','').split(/[/?#]/)[0];
-    console.log("url:",url," domain:",domain," curdomain:",curdomain," allowedurls:",allowedurls);
     var curdomain = window.location.toString().replace('http://','').replace('https://','').split(/[/?#]/)[0];
-    console.log("url:",url," domain:",domain," curdomain:",curdomain," allowedurls:",allowedurls);
     var allowedurls = domain.endsWith("steampowered.com") || domain.endsWith("steamcommunity.com") || domain.endsWith("isthereanydeal.com");
-    console.log("url:",url," domain:",domain," curdomain:",curdomain," allowedurls:",allowedurls);
     if (url.startsWith("resource:")||((domain!=curdomain)&&allowerdurls)) {
-     console.log("jurassic fetch");
        return new Promise (function(resolve, reject) {         
          xulconnect.send_request({"command":"fetch","data":{"url":url}},function(response) {
-           //console.log(response);
-           // This is called even on 404 etc
-           // so check the status
            if (response.status == 200) {
-             // Resolve the promise with the response text
              response.json = function(){
                 return JSON.parse(this.body);
-//                   return new Promise (function(resolve, reject) {
-//                      resolve(this.body)
-//                   });
 		};
              response.text = function(){
                 return JSON.stringify(this.body);
-//                   return new Promise (function(resolve, reject) {
-//                      resolve(JSON.stringify(this.body))
-//                   });
 		};
 
              resolve(response);
@@ -135,8 +104,20 @@ if (!oldfetch) {
          });
        });
     } else {
-     console.log("classic fetch");
      return oldfetch(url);
     }
   };
 };
+
+function ShowOptions() {
+         xulconnect.send_request({"command":"options"},null);
+}
+
+var menuUpdater = function (){
+  var menuitem = document.querySelector("#es_popup > div:nth-child(1) > a:nth-child(1)");
+  if (menuitem && !menuitem.onclick) {
+    menuitem.onclick=ShowOptions;
+    window.removeEventListener("load",menuUpdater,false);
+  }
+}
+window.addEventListener("load", menuUpdater,false);

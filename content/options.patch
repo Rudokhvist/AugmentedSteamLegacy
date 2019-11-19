@@ -1,0 +1,13 @@
+5c5
+<     <link href="css/enhancedsteam-chrome.css" rel="stylesheet" type="text/css">
+---
+>     <link href="../enhancedsteam-legacy.css" rel="stylesheet" type="text/css">
+717a718,723
+>             <ul class="credits">
+>                 <li>Ryzhehvost <a href="https://steamcommunity.com/id/Ryzhehvost">Ryzhehvost</a></li>
+>             </ul>
+> 
+>             <h2">Official version</h2>
+> 
+936a943
+> <script src="../chrome.js"></script>

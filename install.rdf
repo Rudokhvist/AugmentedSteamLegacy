@@ -15,7 +15,8 @@
     <em:creator>Ryzhehvost</em:creator>
     <!-- Web page address through which extension is distributed -->
     <em:homepageURL>https://github.com/Ryzhehvost/AugmentedSteamLegacy</em:homepageURL>
-    <!-- This section gives details of the target application for the extension (in this case: Firefox 2) -->
+    <em:iconURL>chrome://AugmentedSteamLegacy/content/AugmentedSteam/img/es_32.png</em:iconURL>
+    <!-- This section gives details of the target application for the extension (in this case: Palemoon 28) -->
     <em:targetApplication>
       <Description>
         <em:id>{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}</em:id>

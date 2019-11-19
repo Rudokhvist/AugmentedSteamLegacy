@@ -1,0 +1,3 @@
+content AugmentedSteamLegacy content/ contentaccessible=yes
+resource augmentedsteamlegacy content/
+overlay chrome://browser/content/browser.xul chrome://AugmentedSteamLegacy/content/overlay.xul

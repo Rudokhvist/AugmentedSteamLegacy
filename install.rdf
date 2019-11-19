@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <!-- Unique ID for extension. Can be in e-mail address format or GUID format -->
+    <em:id>AugmentedSteamLegacy@jogger.pp.ua</em:id>
+    <!-- Indicates that this add-on is an extension -->
+    <em:type>2</em:type>
+    <!-- Extension name displayed in Add-on Manager -->
+    <em:name>Augmented Steam Legacy</em:name>
+    <!-- Extension version number. There is a version numbering scheme you must follow -->
+    <em:version>0.1</em:version>
+    <!-- Brief description displayed in Add-on Manager -->
+    <em:description>unofficial Augmented Steam for Palemoon</em:description>
+    <!-- Name of extension's primary developer. Change to your name -->
+    <em:creator>Ryzhehvost</em:creator>
+    <!-- Web page address through which extension is distributed -->
+    <em:homepageURL>https://github.com/Ryzhehvost/AugmentedSteamLegacy</em:homepageURL>
+    <!-- This section gives details of the target application for the extension (in this case: Firefox 2) -->
+    <em:targetApplication>
+      <Description>
+        <em:id>{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}</em:id>
+        <em:minVersion>28.0</em:minVersion>
+        <em:maxVersion>*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>
+</RDF>

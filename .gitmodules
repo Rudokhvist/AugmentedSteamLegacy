@@ -1,0 +1,3 @@
+[submodule "content/AugmentedSteam"]
+	path = content/AugmentedSteam
+	url = https://github.com/tfedor/AugmentedSteam.git

@@ -38,7 +38,11 @@ class baseStorage {
     let statement = this.dbConn.createStatement("SELECT (value) FROM "+this.tablename+" WHERE key = :key;");
     statement.params.key = key;
     if (statement.executeStep()) {
-       result = JSON.parse(statement.row.value);
+      try {
+        result = JSON.parse(statement.row.value);
+      } catch (e){ //value is not a json
+        result = statement.row.value;
+      }
     }
     statement.reset();
     return result;

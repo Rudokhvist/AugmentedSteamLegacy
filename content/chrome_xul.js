@@ -137,7 +137,11 @@ var xullisten = {
           if (request.data == null) {
              statement = dbConn.createStatement("SELECT * FROM storage;");
              while (statement.executeStep()) {
-  	 	result[statement.row.key]=JSON.parse(statement.row.value);
+                try {
+  	 	  result[statement.row.key]=JSON.parse(statement.row.value);
+                } catch (e){ //value is not a json
+                  result[statement.row.key]=statement.row.value;
+                }
 	     }	     
           } else {
             for (let k in request.data) { //TODO: Make a proper implementation to use only one request instead of a bunch
@@ -145,7 +149,11 @@ var xullisten = {
                 statement = dbConn.createStatement("SELECT * FROM storage WHERE key = :key;");
                 statement.params.key = k;
                 while (statement.executeStep()) {
-                  result[statement.row.key]=JSON.parse(statement.row.value);
+                  try {
+  	 	    result[statement.row.key]=JSON.parse(statement.row.value);
+                  } catch (e){ //value is not a json
+                    result[statement.row.key]=statement.row.value;
+                  }
 	        }
                 statement.reset();
               }

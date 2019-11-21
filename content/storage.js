@@ -38,7 +38,7 @@ class baseStorage {
     let statement = this.dbConn.createStatement("SELECT (value) FROM "+this.tablename+" WHERE key = :key;");
     statement.params.key = key;
     if (statement.executeStep()) {
-       result = statement.row.value;
+       result = JSON.parse(statement.row.value);
     }
     statement.reset();
     return result;
@@ -59,7 +59,7 @@ class baseStorage {
        statement = this.dbConn.createStatement("INSERT INTO "+this.tablename+"(key,value) VALUES(:key,:value);");
     }
     statement.params.key = key;
-    statement.params.value=value;
+    statement.params.value=JSON.stringify(value);
     statement.execute(); 
   }
 

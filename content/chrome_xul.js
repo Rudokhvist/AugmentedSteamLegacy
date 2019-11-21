@@ -123,7 +123,7 @@ var xullisten = {
                     statement = dbConn.createStatement("INSERT INTO storage(key,value) VALUES(:key,:value);");
                  }
                  statement.params.key = k;
-                 statement.params.value=request.data[k]
+                 statement.params.value=JSON.stringify(request.data[k]);
 		 statement.execute(); //TODO: form a one request instead of chrome shit
               }
            }
@@ -133,11 +133,11 @@ var xullisten = {
  
     if (request.command == "get") {
           let statement;
-          var result = [];
+          var result = {};
           if (request.data == null) {
              statement = dbConn.createStatement("SELECT * FROM storage;");
              while (statement.executeStep()) {
-  	 	result.push({[statement.row.key]:statement.row.value});
+  	 	result[statement.row.key]=JSON.parse(statement.row.value);
 	     }	     
           } else {
             for (let k in request.data) { //TODO: Make a proper implementation to use only one request instead of a bunch
@@ -145,7 +145,7 @@ var xullisten = {
                 statement = dbConn.createStatement("SELECT * FROM storage WHERE key = :key;");
                 statement.params.key = k;
                 while (statement.executeStep()) {
-                  result.push({[statement.row.key]:statement.row.value});
+                  result[statement.row.key]=JSON.parse(statement.row.value);
 	        }
                 statement.reset();
               }

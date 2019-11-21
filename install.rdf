@@ -8,7 +8,7 @@
     <!-- Extension name displayed in Add-on Manager -->
     <em:name>Augmented Steam Legacy</em:name>
     <!-- Extension version number. There is a version numbering scheme you must follow -->
-    <em:version>0.1</em:version>
+    <em:version>0.2</em:version>
     <!-- Brief description displayed in Add-on Manager -->
     <em:description>unofficial Augmented Steam for Palemoon</em:description>
     <!-- Name of extension's primary developer. Change to your name -->

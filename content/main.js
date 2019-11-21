@@ -1,3 +1,4 @@
+(function(){
 Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/FileUtils.jsm");
 
@@ -24,7 +25,8 @@ var baseDocument = document;
 
 var environment = {
   "document": baseDocument.implementation.createHTMLDocument(),
-  "xulDocument": baseDocument
+  "xulDocument": baseDocument,
+  "dbConn": dbConn
 };
 Services.scriptloader.loadSubScript("chrome://AugmentedSteamLegacy/content/chrome_xul.js",environment);
 Services.scriptloader.loadSubScript("chrome://AugmentedSteamLegacy/content/storage.js",environment);
@@ -114,3 +116,4 @@ var myExtension = {
   // do something
   //}
 };
+})();

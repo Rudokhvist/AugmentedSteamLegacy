@@ -91,7 +91,7 @@ if (!oldfetch) {
                 return JSON.parse(this.body);
 		};
              response.text = function(){
-                return JSON.stringify(this.body);
+                return this.body;
 		};
 
              resolve(response);

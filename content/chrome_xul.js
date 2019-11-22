@@ -59,8 +59,6 @@ var chrome = {
 
     },
 
-    sync: chrome.local,
-
     onChanged: {
         addListener: function (onChange){
           return null;
@@ -86,6 +84,8 @@ var chrome = {
   }
 
 };
+
+chrome.storage.sync = chrome.storage.local;
 
 var xullisten = {
   listen_request: function(callback) { // analogue of chrome.extension.onRequest.addListener

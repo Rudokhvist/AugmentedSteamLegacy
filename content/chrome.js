@@ -24,8 +24,6 @@ var chrome = {
   dbConn : null,
   storage : { 
 
-    sync: false,
-
     local: {
         set : function (data,callback){
            xulconnect.send_request({"command":"set","data":data},callback);
@@ -76,6 +74,8 @@ var chrome = {
   }
 
 };
+
+chrome.storage.sync = chrome.storage.local;
 
 if (!oldfetch) {
   var oldfetch = fetch;

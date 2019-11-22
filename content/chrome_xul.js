@@ -3,8 +3,6 @@ var chrome = {
 
   storage : { 
 
-    sync: false,
-
     local: {
         set : function (data,callback){
            for (let k in data) {
@@ -60,6 +58,8 @@ var chrome = {
 	},
 
     },
+
+    sync: chrome.local,
 
     onChanged: {
         addListener: function (onChange){
